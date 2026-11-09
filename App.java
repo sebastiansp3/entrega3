@@ -14,16 +14,15 @@ public class App {
             System.out.println("2. buscar referencia en lote");
             System.out.println("3. ingresar prenda al lote");
             System.out.println("4. salir");
-            System.out.print("Seleccione una opcion: ");
+            System.out.println("Seleccione una opcion: ");
 
             opcion = sc.nextInt();
-            sc.nextLine();
+            sc.nextLine(); 
 
             switch (opcion) {
                 case 1:
                     System.out.println("\nReferencias en bodega:");
                     boolean vacia = true;
-
                     for (int i = 0; i < lote.length; i++) {
                         if (lote[i] != null) {
                             System.out.println("- " + lote[i]);
@@ -36,11 +35,17 @@ public class App {
                     break;
 
                 case 2:
-                    System.out.print("Ingrese el nombre de la prenda a buscar: ");
+                    System.out.println("Ingrese el nombre de la prenda a buscar: ");
                     String nombreBuscado = sc.nextLine();
 
-                    boolean encontrado = buscarReferencia(lote, nombreBuscado);
-                    
+                    boolean encontrado = false;
+                    for (int i = 0; i < lote.length; i++) {
+                        if (lote[i] != null && lote[i].equalsIgnoreCase(nombreBuscado)) {
+                            encontrado = true;
+                            break; 
+                        }
+                    }
+
                     if (encontrado) {
                         System.out.println("La prenda " + nombreBuscado + " esta guardada.");
                     } else {
@@ -53,7 +58,6 @@ public class App {
                     String nuevaPrenda = sc.nextLine();
 
                     boolean ingresado = false;
-                    
                     for (int i = 0; i < lote.length; i++) {
                         if (lote[i] == null) {
                             lote[i] = nuevaPrenda;
@@ -62,7 +66,6 @@ public class App {
                             break; 
                         }
                     }
-
                     if (!ingresado) {
                         System.out.println("Error: no hay espacio disponible en el lote.");
                     }
@@ -79,6 +82,5 @@ public class App {
         } while (opcion != 4);
 
         sc.close();
-    } 
-
-    
+    }
+}
