@@ -14,7 +14,7 @@ public class App {
             System.out.println("2. buscar referencia en lote");
             System.out.println("3. ingresar prenda al lote");
             System.out.println("4. salir");
-            System.out.println("Seleccione una opcion: ");
+            System.out.print("Seleccione una opcion: ");
 
             opcion = sc.nextInt();
             sc.nextLine();
@@ -35,7 +35,50 @@ public class App {
                     }
                     break;
 
+                case 2:
+                    System.out.print("Ingrese el nombre de la prenda a buscar: ");
+                    String nombreBuscado = sc.nextLine();
+
+                    boolean encontrado = buscarReferencia(lote, nombreBuscado);
+                    
+                    if (encontrado) {
+                        System.out.println("La prenda " + nombreBuscado + " esta guardada.");
+                    } else {
+                        System.out.println("La prenda " + nombreBuscado + " no se encuentra en este lote.");
+                    }
+                    break;
+
+                case 3:
+                    System.out.print("Ingrese el nombre de la nueva referencia: ");
+                    String nuevaPrenda = sc.nextLine();
+
+                    boolean ingresado = false;
+                    
+                    for (int i = 0; i < lote.length; i++) {
+                        if (lote[i] == null) {
+                            lote[i] = nuevaPrenda;
+                            System.out.println("Prenda " + nuevaPrenda + " guardada exitosamente en la posicion " + i + ".");
+                            ingresado = true;
+                            break; 
+                        }
+                    }
+
+                    if (!ingresado) {
+                        System.out.println("Error: no hay espacio disponible en el lote.");
+                    }
+                    break;
+
+                case 4:
+                    System.out.println("Cerrando la aplicacion...");
+                    break;
+
+                default:
+                    System.out.println("Opcion invalida.");
+                    break;
             }
-        }
-    }         
-}    
+        } while (opcion != 4);
+
+        sc.close();
+    } 
+
+    
